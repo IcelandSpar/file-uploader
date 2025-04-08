@@ -1,12 +1,17 @@
-const { PrismaClient } = require('@prisma/client');
+const prisma = require('../db/client');
 
-const prisma = new PrismaClient();
+
+const isAuthenticated = (userObj) => {
+  return !!userObj
+};
 
 const getSignUpFormPage = async (req, res) => {
   const usersDbTest = await prisma.users.findMany({
 
   });
+
   console.log(usersDbTest);
+
   res.render('sign-up');
 };
 
@@ -27,12 +32,31 @@ const postSignUpForm = async (req, res) => {
 
 };
 
-const getLogInFormPage = (req, res) => {
+const getLogInFormPage = async (req, res) => {
+  const session = await prisma.session.findMany();
+
   res.render('log-in');
+}
+
+const getLogOut = (req, res, next) => {
+  req.logout((err) => {
+    if(err) {
+      return next(err);
+    }
+    res.redirect('/');
+  })
+}
+
+const postLogInForm = (req, res) => {
+res.render('index', {
+  isAuth: isAuthenticated(req.session.passport),
+})
 }
 
 module.exports = {
   getSignUpFormPage,
   postSignUpForm,
   getLogInFormPage,
+  postLogInForm,
+  getLogOut,
 }

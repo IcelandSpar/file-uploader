@@ -7,6 +7,8 @@ const { PrismaClient } = require('@prisma/client');
 const app = express();
 const indexRouter = require('./routes/indexRouter');
 const formRouter = require('./routes/formRouter');
+const passport = require('passport');
+
 
 
 app.set('views', path.join(__dirname, "views"));
@@ -34,6 +36,10 @@ app.use(
     )
   })
 );
+
+require('./config/passport');
+app.use(passport.session());
+
 
 app.use('/', indexRouter);
 app.use('/form', formRouter);
