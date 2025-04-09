@@ -10,12 +10,13 @@ formRouter.get('/sign-up', getSignUpFormPage);
 formRouter.post('/sign-up', postSignUpForm);
 
 formRouter.get('/log-in', getLogInFormPage);
-formRouter.post('/log-in', passport.authenticate('local'), postLogInForm);
+formRouter.post('/log-in', passport.authenticate('local', { failureRedirect: '/form/log-in', failureMessage: true}), postLogInForm);
 
 formRouter.get('/log-out', getLogOut);
 
 formRouter.get('/upload', getUploadFormPage);
 formRouter.post('/upload', upload.single('uploadedFile'), postUploadForm);
+
 
 
 

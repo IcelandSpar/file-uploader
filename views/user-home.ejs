@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+</head>
+<body>
+  <h1>Welcome Home!</h1>
+  <dialog class="createFolderModal">
+    <form method="POST">
+      <label for="folderName">Folder Name: </label>
+      <br>
+      <input type="text" name="folderName" id="folderName">
+      <br>
+      <label for="folderDescription">Folder Description: </label>
+      <br>
+      <input type="text" id="folderDescription" name="folderDescription">
+      <br>
+      <button type="submit">Submit</button>
+      <button type="button" class="exitBtn">Exit</button>
+    </form>
+  </dialog>
+  <button class="createFolderBtn">Create A New Folder</button>
+  <script>
+    const createFolderBtn = document.querySelector('.createFolderBtn');
+    const createFolderModal = document.querySelector('.createFolderModal');
+    const exitBtn = document.querySelector('.exitBtn');
+
+    exitBtn.addEventListener('click', (e) => {
+      createFolderModal.close();
+    });
+
+    createFolderBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      createFolderModal.showModal();
+    });
+  </script>
+</body>
+</html>

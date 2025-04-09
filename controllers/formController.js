@@ -37,8 +37,16 @@ const postSignUpForm = async (req, res) => {
 
 const getLogInFormPage = async (req, res) => {
   const session = await prisma.session.findMany();
+  if(!!req.session.passport == false) {
+    res.render('log-in', {failureMessage: req.session.messages});
+    req.session.messages = undefined;
+  } else {
+    res.render('log-in');
+  }
 
-  res.render('log-in');
+    
+
+  
 }
 
 const getLogOut = (req, res, next) => {
@@ -51,9 +59,9 @@ const getLogOut = (req, res, next) => {
 }
 
 const postLogInForm = (req, res) => {
-res.render('index', {
-  isAuth: isAuthenticated(req.session.passport),
-})
+
+  res.redirect(`/${req.user.id}/${req.user.username}`)
+  // isAuth: isAuthenticated(req.session.passport),
 }
 
 const getUploadFormPage = (req, res) => {
@@ -73,4 +81,5 @@ module.exports = {
   getLogOut,
   getUploadFormPage,
   postUploadForm,
+  isAuthenticated
 }

@@ -8,6 +8,7 @@ const app = express();
 const indexRouter = require('./routes/indexRouter');
 const formRouter = require('./routes/formRouter');
 const passport = require('passport');
+const userRouter = require('./routes/userRouter');
 
 
 
@@ -44,6 +45,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/form', formRouter);
+app.use('/', userRouter);
 
 
 
