@@ -1,4 +1,5 @@
 const prisma = require('../db/client');
+const bcrypt = require('bcryptjs');
 
 
 const isAuthenticated = (userObj) => {
@@ -17,14 +18,16 @@ const getSignUpFormPage = async (req, res) => {
 
 const postSignUpForm = async (req, res) => {
   try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPass = await bcrypt.hash(req.body.password, 10);
+    
     const createdUsersTest = await prisma.users.create({
       data: {
         username: req.body.username,
-        hash: req.body.password,
-        salt: 'random salt',
+        hash: hashedPass,
+        salt: salt,
       }
     });
-    console.log(createdUsersTest);
     res.redirect('/form/sign-up');
   } catch(err) {
     return next(err);
