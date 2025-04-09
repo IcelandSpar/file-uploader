@@ -56,10 +56,21 @@ res.render('index', {
 })
 }
 
+const getUploadFormPage = (req, res) => {
+  res.render('upload-form');
+}
+
+const postUploadForm = (req, res) => {
+  console.log(req.file)
+  res.redirect('/form/upload');
+}
+
 module.exports = {
   getSignUpFormPage,
   postSignUpForm,
   getLogInFormPage,
   postLogInForm,
   getLogOut,
+  getUploadFormPage,
+  postUploadForm,
 }

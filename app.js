@@ -17,6 +17,7 @@ app.use(express.urlencoded({extended: true}));
 
 const assetsPath = path.join(__dirname, 'public');
 app.use(express.static(assetsPath));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use(
   expressSession({
