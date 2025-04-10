@@ -6,7 +6,22 @@
   <title>Home</title>
 </head>
 <body>
-  <h1>Welcome Home!</h1>
+  <main>
+    <section>
+      <h1>Folders</h1>
+      <% if(locals.usersFolders) { %>
+        <ul>
+          <% locals.usersFolders.forEach((item) => { %>
+            
+            <li>
+              <h3><%= item.folderName %></h3>
+
+            </li>
+          <% }) %>
+        </ul>
+        <% } %>
+    </section>
+  </main>
   <dialog class="createFolderModal">
     <form method="POST">
       <label for="folderName">Folder Name: </label>
