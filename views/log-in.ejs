@@ -19,7 +19,7 @@
   <% } %>
   <form action="/form/log-in" method="POST">
     <h1>Log in form</h1>
-    <p>Please Fix the errors: <%= locals.failureMessage %></p>
+    <p><%= locals.failureMessage %></p>
     <label for="username">Username: </label>
     <br>
     <input type="text" name="username" id="username">

@@ -7,6 +7,18 @@
 </head>
 <body>
   <%-include('partials/nav-bar') %>
+  <h1>Register for an account !</h1>
+  <% if(locals.errors) { %>
+    <section>
+      <h2>Please Fix the errors:</h2>
+      <ul>
+        <%  errors.forEach((errObj) => { %>
+          <li><%= errObj.msg %></li>
+        <% }) %>
+    </ul>
+    </section>
+  <% } %>
+    <p><%= locals.userTakenMsg  %></p>
   <form action="/form/sign-up" method="POST">
     <label for="username">Username: </label>
     <br>
