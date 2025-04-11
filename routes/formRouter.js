@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getSignUpFormPage, getLogInFormPage, postSignUpForm, getLogOut, postLogInForm, getUploadFormPage, postUploadForm } = require('../controllers/formController');
+const { getSignUpFormPage, getLogInFormPage, postSignUpForm, getLogOut, postLogInForm, getUploadFormPage, postUploadForm, validateUser } = require('../controllers/formController');
 const formRouter = Router();
 const passport = require('passport');
 
@@ -10,7 +10,7 @@ formRouter.get('/sign-up', getSignUpFormPage);
 formRouter.post('/sign-up', postSignUpForm);
 
 formRouter.get('/log-in', getLogInFormPage);
-formRouter.post('/log-in', passport.authenticate('local', { failureRedirect: '/form/log-in', failureMessage: true}), postLogInForm);
+formRouter.post('/log-in', postLogInForm );
 
 formRouter.get('/log-out', getLogOut);
 

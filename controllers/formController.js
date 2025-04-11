@@ -1,6 +1,17 @@
 const prisma = require('../db/client');
 const bcrypt = require('bcryptjs');
+const { body, validationResult } = require('express-validator');
+const passport = require('passport');
 
+const validateUser = [
+body('username').trim()
+.isLength({min: 4, max: 30}).withMessage('Username must be between 4-30 characters.')
+.isAlphanumeric().withMessage('Username must be an alphanumeric value.'),
+body('password').trim()
+.isLength({min: 4, max: 30}).withMessage('Username must be between 4-30 characters.')
+.isAlphanumeric().withMessage('Username must be an alphanumeric value.')
+
+];
 
 const isAuthenticated = (userObj) => {
   return !!userObj
@@ -58,11 +69,26 @@ const getLogOut = (req, res, next) => {
   })
 }
 
-const postLogInForm = (req, res) => {
+const postLogInForm = [
+  validateUser,
+  (req, res) => {
 
-  res.redirect(`/${req.user.id}/${req.user.username}`)
+  const errors = validationResult(req);
+
+
+  if(!errors.isEmpty()) {
+  return res.status(400).render('log-in', {errors: errors.array()})
+
+  } else {
+    passport.authenticate('local', {failureRedirect: '/form/log-in', successRedirect: '/', failureMessage: true})(req, res)
+
+  }
+  
+
+
+  // res.redirect(`/${req.user.id}/${req.user.username}`)
   // isAuth: isAuthenticated(req.session.passport),
-}
+}]
 
 const getUploadFormPage = (req, res) => {
   res.render('upload-form');

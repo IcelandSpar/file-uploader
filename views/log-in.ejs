@@ -7,9 +7,19 @@
 </head>
 <body>
   <%-include('partials/nav-bar') %>
+  <% if(locals.errors) { %>
+    <section>
+      <h2>Please Fix the errors:</h2>
+      <ul>
+        <%  errors.forEach((errObj) => { %>
+          <li><%= errObj.msg %></li>
+        <% }) %>
+    </ul>
+    </section>
+  <% } %>
   <form action="/form/log-in" method="POST">
     <h1>Log in form</h1>
-    <p><%= locals.failureMessage %></p>
+    <p>Please Fix the errors: <%= locals.failureMessage %></p>
     <label for="username">Username: </label>
     <br>
     <input type="text" name="username" id="username">
