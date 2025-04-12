@@ -26,6 +26,7 @@ model Users {
   hash     String    @db.VarChar(255)
   salt     String    @db.VarChar(255)
   Folders  Folders[]
+  Files    Files[]
 }
 
 model Folders {
@@ -37,4 +38,20 @@ model Folders {
   created     DateTime @default(now())
   modified    DateTime @updatedAt
   shared      Boolean  @default(false)
+  Files       Files[]
+}
+
+model Files {
+  id           Int     @id @default(autoincrement())
+  folder       Folders @relation(fields: [folderId], references: [id])
+  folderId     Int
+  user         Users   @relation(fields: [userId], references: [id])
+  userId       Int
+  originalName String  @db.VarChar(255)
+  encoding     String  @db.VarChar(255)
+  mimetype     String  @db.VarChar(255)
+  destination  String  @db.VarChar(255)
+  fileName     String  @db.VarChar(255)
+  path         String  @db.VarChar(255)
+  size         Int
 }

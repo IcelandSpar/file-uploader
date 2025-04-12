@@ -14,8 +14,8 @@ formRouter.post('/log-in', postLogInForm );
 
 formRouter.get('/log-out', getLogOut);
 
-formRouter.get('/upload', getUploadFormPage);
-formRouter.post('/upload', upload.single('uploadedFile'), postUploadForm);
+// formRouter.get('/upload', getUploadFormPage);
+// formRouter.post('/upload', upload.single('uploadedFile'), postUploadForm);
 
 
 

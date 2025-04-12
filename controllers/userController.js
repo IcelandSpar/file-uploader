@@ -54,6 +54,19 @@ console.log(req.params.fileName)
   });
 }
 
+const getFolderPage = (req, res) => {
+  console.log(req.params)
+  res.render('folder', {
+    postAction: `/folders/${req.params.id}/${req.params.user}/${req.params.fileName}`
+  })
+}
+
+const postFile = (req, res) => {
+  console.log(req.file)
+  // obj returned: original name, encoding, mimetype, destination, filename, path, size
+  res.redirect(`/folders/${req.params.id}/${req.params.user}/${req.params.fileName}`)
+}
+
 
 
 
@@ -63,4 +76,6 @@ module.exports = {
   getUserHomePage,
   postNewFolder,
   getDownloadFile,
+  getFolderPage,
+  postFile,
 }
