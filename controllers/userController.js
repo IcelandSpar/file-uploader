@@ -3,7 +3,8 @@ const prisma = require('../db/client');
 
 const getUserHomePage = async (req, res) => {
 
-  console.log(req.user)
+  // console.log(req.user)
+  const isAuth = isAuthenticated(req.session.passport);
 
   const usersFolders = await prisma.folders.findMany({
     where: {
@@ -15,8 +16,13 @@ const getUserHomePage = async (req, res) => {
 
   console.log(usersFolders)
 
-  if(isAuthenticated(req.session.passport) && req.session.passport.user == req.params.id && req.user.username == req.params.user) {
-    res.render('user-home', {usersFolders: usersFolders,});
+  if(isAuth && req.session.passport.user == req.params.id && req.user.username == req.params.user) {
+    res.render('user-home', {
+      usersFolders,
+      loggedInUserId: req.params.id,
+      loggedInUsername: req.params.user,
+      isAuth,
+    });
   } else {
     res.end('Not Authorized')
   }
@@ -36,7 +42,16 @@ const postNewFolder = async (req, res) => {
 
 
 
-  res.redirect(`/${req.params.id}/${req.params.user}`);
+  res.redirect(`/folders/${req.params.id}/${req.params.user}`);
+}
+
+const getDownloadFile = (req, res) => {
+  
+console.log(req.params.fileName)
+
+  res.download(`./uploads/${req.params.fileName}`, (err) => {
+    if(err) res.status(404).json({error: 'File not found'});
+  });
 }
 
 
@@ -47,4 +62,5 @@ const postNewFolder = async (req, res) => {
 module.exports = {
   getUserHomePage,
   postNewFolder,
+  getDownloadFile,
 }

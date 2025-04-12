@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const passport = require('passport');
 
+
 const validateUser = [
 body('username').trim()
 .isLength({min: 4, max: 30}).withMessage('Username must be between 4-30 characters.')
@@ -22,7 +23,7 @@ const getSignUpFormPage = async (req, res) => {
 
   });
 
-  console.log(usersDbTest);
+  // console.log(usersDbTest);
 
   res.render('sign-up');
 };
@@ -116,9 +117,11 @@ const getUploadFormPage = (req, res) => {
 }
 
 const postUploadForm = (req, res) => {
-  console.log(req.file)
+  // console.log(req.file)
   res.redirect('/form/upload');
 }
+
+
 
 module.exports = {
   getSignUpFormPage,
@@ -128,5 +131,6 @@ module.exports = {
   getLogOut,
   getUploadFormPage,
   postUploadForm,
-  isAuthenticated
+  isAuthenticated,
+
 }

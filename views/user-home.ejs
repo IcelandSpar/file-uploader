@@ -6,6 +6,7 @@
   <title>Home</title>
 </head>
 <body>
+  <%-include('partials/nav-bar') %>
   <main>
     <section>
       <h1>Folders</h1>
@@ -14,7 +15,7 @@
           <% locals.usersFolders.forEach((item) => { %>
             
             <li>
-              <h3><%= item.folderName %></h3>
+              <a href="/folders/<%= loggedInUserId %>/<%= loggedInUsername %>/<%= item.folderName %>"><%= item.folderName %></a>
 
             </li>
           <% }) %>
@@ -37,6 +38,7 @@
     </form>
   </dialog>
   <button class="createFolderBtn">Create A New Folder</button>
+
   <script>
     const createFolderBtn = document.querySelector('.createFolderBtn');
     const createFolderModal = document.querySelector('.createFolderModal');

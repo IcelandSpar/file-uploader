@@ -1,10 +1,14 @@
 const { Router } = require('express');
 const userRouter = Router();
-const { getUserHomePage, postNewFolder } = require('../controllers/userController.js');
+const { getUserHomePage, postNewFolder, getDownloadFile } = require('../controllers/userController.js');
 
 
-userRouter.get('/:id/:user', getUserHomePage);
-userRouter.post('/:id/:user', postNewFolder);
+userRouter.get('/download/:fileName', getDownloadFile)
+userRouter.get('/folders/:id/:user', getUserHomePage);
+userRouter.post('/folders/:id/:user', postNewFolder);
+
+
+
 
 
 module.exports = userRouter;

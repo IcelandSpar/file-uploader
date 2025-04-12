@@ -11,6 +11,7 @@
   <%-include('partials/nav-bar') %>
   <h1>Home Test</h1>
   <h2><%= locals.isAuth ? 'You Are Authenticated' : 'Begone! You are not allowed.' %></h2>
-  
+  <p><%= locals.loggedInUsername %></p>
+  <p><%= locals.loggedInUserId %></p>
 </body>
 </html>
