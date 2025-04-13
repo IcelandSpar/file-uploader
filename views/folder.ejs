@@ -8,5 +8,16 @@
 <body>
 <h1>Folder View</h1>
 <%-include('partials/upload-form') %>
+<% if(locals.files) { %>
+  <ul>
+    <% files.forEach((file) => { %>
+      <li>
+        <p><%= file.originalName %></p>
+        <p><%= file.fileName %></p>
+        <a href="/download/<%= file.fileName %>">Download</a>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
 </body>
 </html>

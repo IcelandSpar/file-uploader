@@ -14,7 +14,6 @@ const getUserHomePage = async (req, res) => {
 
   
 
-  console.log(usersFolders)
 
   if(isAuth && req.session.passport.user == req.params.id && req.user.username == req.params.user) {
     res.render('user-home', {
@@ -38,7 +37,7 @@ const postNewFolder = async (req, res) => {
     }
   })
 
-  console.log(createdFolder);
+
 
 
 
@@ -47,28 +46,82 @@ const postNewFolder = async (req, res) => {
 
 const getDownloadFile = (req, res) => {
   
-console.log(req.params.fileName)
+
 
   res.download(`./uploads/${req.params.fileName}`, (err) => {
     if(err) res.status(404).json({error: 'File not found'});
   });
 }
 
-const getFolderPage = (req, res) => {
-  console.log(req.params)
+const getFolderPage = async (req, res) => {
+
+  const folderInfo = await prisma.folders.findFirst({
+    where: {
+      folderName: req.params.folderName,
+    },
+
+  });
+
+
+
+  const files = await prisma.files.findMany({
+    where: {
+      folderId: folderInfo.id,
+    }
+  })
+
+
   res.render('folder', {
-    postAction: `/folders/${req.params.id}/${req.params.user}/${req.params.fileName}`
+    postAction: `/folders/${req.params.id}/${req.params.user}/${req.params.folderName}`,
+    files: files,
   })
 }
 
-const postFile = (req, res) => {
-  console.log(req.file)
+const postFile = async (req, res) => {
+
+  const folderInfo = await prisma.folders.findFirst({
+    where: {
+      folderName: req.params.folderName,
+    },
+    select: {
+      id: true,
+    }
+  });
+
+
+
+  await prisma.files.create({
+    data: {
+      folderId: folderInfo.id,
+      userId: parseInt(req.params.id),
+      originalName: req.file.originalname,
+      encoding: req.file.encoding,
+      mimetype: req.file.mimetype,
+      destination: req.file.destination,
+      fileName: req.file.filename,
+      path: req.file.path,
+      size: req.file.size,
+    }
+  })
   // obj returned: original name, encoding, mimetype, destination, filename, path, size
-  res.redirect(`/folders/${req.params.id}/${req.params.user}/${req.params.fileName}`)
+  res.redirect(`/folders/${req.params.id}/${req.params.user}/${req.params.folderName}`)
 }
 
 
-
+// model Files {
+//   id           Int     @id @default(autoincrement())
+//   folder       Folders @relation(fields: [folderId], references: [id])
+//   folderId     Int
+//   user         Users   @relation(fields: [userId], references: [id])
+//   userId       Int
+//   originalName String  @db.VarChar(255)
+//   encoding     String  @db.VarChar(255)
+//   mimetype     String  @db.VarChar(255)
+//   destination  String  @db.VarChar(255)
+//   fileName     String  @db.VarChar(255)
+//   path         String  @db.VarChar(255)
+//   size         Int
+// }
 
 
 
