@@ -18,7 +18,7 @@
               <a href="/folders/<%= loggedInUserId %>/<%= loggedInUsername %>/<%= item.folderName %>"><%= item.folderName %></a>
               <p><%= item.description %></p>
               <button class="editFolderModalBtn<%= indx %>" type="button">Edit</button>
-              <button type="button">Delete</button>
+              <button type="button" class="deleteFolderBtn<%= indx %>">Delete</button>
             </li>
             <dialog class="editFolderModal<%= indx %>">
               <form action="/form/edit-folder/<%= item.id %>" method="POST">
@@ -34,6 +34,14 @@
                 <button type="button" class="exitEditFolderModalBtn<%= indx %>">Exit</button>
               </form>
             </dialog>
+
+            <dialog class="deleteFolderModal<%= indx %>">
+              <form action="/form/delete-folder/<%= item.id %>" method="POST">
+                <h3>Are you sure you want to delete <%= item.folderName %>?</h3>
+                <button value='<%= item.id %>' name="folderId" type="submit" class="deleteFolderModalBtn<%= indx %>">Delete</button>
+                <button  type="button" class="deleteFolderModalExit<%= indx %>">Exit</button>
+              </form>
+            </dialog>
           
             <script>
               const editFolderModal<%= indx %> = document.querySelector('.editFolderModal<%= indx %>');
@@ -41,6 +49,9 @@
               const exitEditFolderModalBtn<%= indx %> = document.querySelector('.exitEditFolderModalBtn<%= indx %>');
               const editFolderNameInput<%= indx %> = document.querySelector('.editFolderNameInput<%= indx %>');
               const editFolderDescriptionInput<%= indx %> = document.querySelector('.editFolderDescriptionInput<%= indx %>');
+              const deleteFolderBtn<%= indx %> = document.querySelector('.deleteFolderBtn<%= indx %>');
+              const deleteFolderModal<%= indx %> = document.querySelector('.deleteFolderModal<%= indx %>');
+              const deleteFolderModalExit<%= indx %> = document.querySelector('.deleteFolderModalExit<%= indx %>');
 
               editFolderNameInput<%= indx %>.value = '<%= item.folderName %>';
               editFolderDescriptionInput<%= indx %>.value = '<%= item.description %>'
@@ -55,6 +66,17 @@
                 e.preventDefault();
                 editFolderModal<%= indx %>.close();
               });
+
+              deleteFolderBtn<%= indx %>.addEventListener('click', (e) => {
+                e.preventDefault();
+                deleteFolderModal<%= indx %>.showModal();
+
+              });
+
+              deleteFolderModalExit<%= indx %>.addEventListener('click', (e) => {
+                e.preventDefault();
+                deleteFolderModal<%= indx %>.close();
+              })
           
             </script>
           <% }) %>

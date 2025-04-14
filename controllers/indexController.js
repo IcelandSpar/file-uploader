@@ -10,7 +10,7 @@ const getIndexPage = async (req, res) => {
       }
     });
   
-    console.log(req.session.passport.user)
+
     
     res.render('index', {
       isAuth: isAuthenticated(req.session.passport),

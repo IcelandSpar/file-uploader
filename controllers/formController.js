@@ -135,6 +135,18 @@ const postEditFolderForm = async (req, res) => {
   res.redirect(`/folders/${req.user.id}/${req.user.username}`);
 }
 
+const postDeleteFolderForm = async (req, res) => {
+
+  const deletedFolder = await prisma.folders.delete({
+    where: {
+      id: parseInt(req.body.folderId),
+      userId: req.session.passport.user,
+    }
+  });
+  console.log(deletedFolder);
+  res.redirect(`/folders/${req.user.id}/${req.user.username}`);
+}
+
 
 
 module.exports = {
@@ -147,5 +159,6 @@ module.exports = {
   postUploadForm,
   isAuthenticated,
   postEditFolderForm,
+  postDeleteFolderForm,
 
 }

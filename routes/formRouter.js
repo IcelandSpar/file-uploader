@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getSignUpFormPage, getLogInFormPage, postSignUpForm, getLogOut, postLogInForm, getUploadFormPage, postUploadForm, validateUser, postEditFolderForm } = require('../controllers/formController');
+const { getSignUpFormPage, getLogInFormPage, postSignUpForm, getLogOut, postLogInForm, getUploadFormPage, postUploadForm, validateUser, postEditFolderForm, postDeleteFolderForm } = require('../controllers/formController');
 const formRouter = Router();
 const passport = require('passport');
 
@@ -15,6 +15,7 @@ formRouter.post('/log-in', postLogInForm );
 formRouter.get('/log-out', getLogOut);
 
 formRouter.post('/edit-folder/:folderId', postEditFolderForm);
+formRouter.post('/delete-folder/:folderId', postDeleteFolderForm)
 
 // formRouter.get('/upload', getUploadFormPage);
 // formRouter.post('/upload', upload.single('uploadedFile'), postUploadForm);
