@@ -3,12 +3,15 @@ const prisma = require('../db/client');
 
 const getUserHomePage = async (req, res) => {
 
-  // console.log(req.user)
+
   const isAuth = isAuthenticated(req.session.passport);
 
   const usersFolders = await prisma.folders.findMany({
     where: {
       userId: parseInt(req.params.id),
+    },
+    orderBy: {
+      id: 'asc'
     }
   })
 
@@ -58,17 +61,25 @@ const getFolderPage = async (req, res) => {
   const folderInfo = await prisma.folders.findFirst({
     where: {
       folderName: req.params.folderName,
+      userId: req.session.passport.user,
     },
 
   });
+
+  
 
 
 
   const files = await prisma.files.findMany({
     where: {
       folderId: folderInfo.id,
-    }
+    },
+    include: {
+      folder: true,
+    },
+
   })
+
 
 
   res.render('folder', {
@@ -82,12 +93,12 @@ const postFile = async (req, res) => {
   const folderInfo = await prisma.folders.findFirst({
     where: {
       folderName: req.params.folderName,
+      userId: req.session.passport.user,
     },
     select: {
       id: true,
     }
   });
-
 
 
   await prisma.files.create({

@@ -121,6 +121,20 @@ const postUploadForm = (req, res) => {
   res.redirect('/form/upload');
 }
 
+const postEditFolderForm = async (req, res) => {
+
+  await prisma.folders.update({
+    where: {
+      id: parseInt(req.params.folderId),
+    },
+    data: {
+      folderName: req.body.editFolderName,
+         description: req.body.editFolderDescription,
+    }
+  });
+  res.redirect(`/folders/${req.user.id}/${req.user.username}`);
+}
+
 
 
 module.exports = {
@@ -132,5 +146,6 @@ module.exports = {
   getUploadFormPage,
   postUploadForm,
   isAuthenticated,
+  postEditFolderForm,
 
 }

@@ -12,17 +12,59 @@
       <h1>Folders</h1>
       <% if(locals.usersFolders) { %>
         <ul>
-          <% locals.usersFolders.forEach((item) => { %>
+          <% locals.usersFolders.forEach((item, indx) => { %>
             
             <li>
               <a href="/folders/<%= loggedInUserId %>/<%= loggedInUsername %>/<%= item.folderName %>"><%= item.folderName %></a>
-
+              <p><%= item.description %></p>
+              <button class="editFolderModalBtn<%= indx %>" type="button">Edit</button>
+              <button type="button">Delete</button>
             </li>
+            <dialog class="editFolderModal<%= indx %>">
+              <form action="/form/edit-folder/<%= item.id %>" method="POST">
+                <label for="editFolderName">Folder Name: </label>
+                <br>
+                <input type="text" class="editFolderNameInput<%= indx %>" name="editFolderName" id="editFolderName<%= indx %>">
+                <br>
+                <label for="editFolderDescription">Folder Description: </label>
+                <br>
+                <input type="text" class="editFolderDescriptionInput<%= indx %>" name="editFolderDescription" id="editFolderDescription<%= indx %>">
+                <br>
+                <button type="submit">Submit</button>
+                <button type="button" class="exitEditFolderModalBtn<%= indx %>">Exit</button>
+              </form>
+            </dialog>
+          
+            <script>
+              const editFolderModal<%= indx %> = document.querySelector('.editFolderModal<%= indx %>');
+              const editFolderModalBtn<%= indx %> = document.querySelector('.editFolderModalBtn<%= indx %>');
+              const exitEditFolderModalBtn<%= indx %> = document.querySelector('.exitEditFolderModalBtn<%= indx %>');
+              const editFolderNameInput<%= indx %> = document.querySelector('.editFolderNameInput<%= indx %>');
+              const editFolderDescriptionInput<%= indx %> = document.querySelector('.editFolderDescriptionInput<%= indx %>');
+
+              editFolderNameInput<%= indx %>.value = '<%= item.folderName %>';
+              editFolderDescriptionInput<%= indx %>.value = '<%= item.description %>'
+
+
+              editFolderModalBtn<%= indx %>.addEventListener('click', (e) => {
+                e.preventDefault();
+                editFolderModal<%= indx %>.showModal();
+              });
+          
+              exitEditFolderModalBtn<%= indx %>.addEventListener('click', (e) => {
+                e.preventDefault();
+                editFolderModal<%= indx %>.close();
+              });
+          
+            </script>
           <% }) %>
         </ul>
         <% } %>
     </section>
   </main>
+
+
+
   <dialog class="createFolderModal">
     <form method="POST">
       <label for="folderName">Folder Name: </label>
