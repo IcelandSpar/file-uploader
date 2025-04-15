@@ -2,6 +2,7 @@ const prisma = require('../db/client');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const passport = require('passport');
+const { unlink } = require('node:fs');
 
 
 const validateUser = [
@@ -137,13 +138,28 @@ const postEditFolderForm = async (req, res) => {
 
 const postDeleteFolderForm = async (req, res) => {
 
+  const filesToBeDeleted = await prisma.files.findMany({
+    where: {
+      folderId: parseInt(req.body.folderId),
+      userId: req.session.passport.user,
+    }
+  });
+
   const deletedFolder = await prisma.folders.delete({
     where: {
       id: parseInt(req.body.folderId),
       userId: req.session.passport.user,
     }
   });
-  console.log(deletedFolder);
+
+
+  filesToBeDeleted.forEach((file) => {
+    unlink(file.path, (err) => {
+      if(err) throw err;
+    })
+    console.log(`${file.path} was deleted.`);
+  })
+
   res.redirect(`/folders/${req.user.id}/${req.user.username}`);
 }
 
