@@ -161,7 +161,37 @@ const postDeleteFolderForm = async (req, res) => {
   })
 
   res.redirect(`/folders/${req.user.id}/${req.user.username}`);
-}
+};
+
+const postDeleteFile = async (req, res) => {
+  
+  const fileFolderOrigin = await prisma.files.findFirst({
+    where: {
+      userId: req.session.passport.user,
+      id: parseInt(req.params.fileId),
+      
+    },
+    include: {
+      folder: true,
+    }
+  });
+
+  const deletedFile = await prisma.files.delete({
+    where: {
+      userId: req.session.passport.user,
+      id: parseInt(req.params.fileId),
+    }
+  });
+
+  unlink(fileFolderOrigin.path, (err) => {
+    if(err) throw err;
+    console.log(`${fileFolderOrigin.path} was deleted.`);
+  })
+
+
+
+  res.redirect(`/folders/${req.user.id}/${req.user.username}/${fileFolderOrigin.folder.folderName}`);
+};
 
 
 
@@ -176,5 +206,5 @@ module.exports = {
   isAuthenticated,
   postEditFolderForm,
   postDeleteFolderForm,
-
+  postDeleteFile,
 }

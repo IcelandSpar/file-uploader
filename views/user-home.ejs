@@ -38,6 +38,7 @@
             <dialog class="deleteFolderModal<%= indx %>">
               <form action="/form/delete-folder/<%= item.id %>" method="POST">
                 <h3>Are you sure you want to delete <%= item.folderName %>?</h3>
+                <p>All Files inside folder will be permanently deleted !</p>
                 <button value='<%= item.id %>' name="folderId" type="submit" class="deleteFolderModalBtn<%= indx %>">Delete</button>
                 <button  type="button" class="deleteFolderModalExit<%= indx %>">Exit</button>
               </form>
