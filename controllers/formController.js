@@ -193,6 +193,20 @@ const postDeleteFile = async (req, res) => {
   res.redirect(`/folders/${req.user.id}/${req.user.username}/${fileFolderOrigin.folder.folderName}`);
 };
 
+const getCheckIfUserWillDelete = async (req, res) => {
+  console.log(req.params.fileId)
+  const fileToBeDeleted = await prisma.files.findFirst({
+    where: {
+      id: parseInt(req.params.fileId),
+    }
+  });
+  console.log(fileToBeDeleted)
+
+  res.render('verify-delete-file', {
+    file: fileToBeDeleted,
+  })
+}
+
 
 
 module.exports = {
@@ -207,4 +221,5 @@ module.exports = {
   postEditFolderForm,
   postDeleteFolderForm,
   postDeleteFile,
+  getCheckIfUserWillDelete,
 }

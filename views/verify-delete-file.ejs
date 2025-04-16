@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Delete</title>
+</head>
+<body>
+  <form action="/form/delete-file/<%= file.id %>" method="POST">
+    <h2>Are you sure you want to delete <%= file.originalName %>?</h2>
+    <p>This will be a permanent change !</p>
+    <br>
+    <button type="submit">Delete <%= file.originalName %></button>
+    <a href="/">Home</a>
+  </form>
+</body>
+</html>

@@ -15,7 +15,7 @@
         <p><%= file.originalName %></p>
         <p><%= file.fileName %></p>
         <a href="/download/<%= file.fileName %>">Download</a>
-        <form action="/form/delete-file/<%= file.id %>" method="POST"><button type="submit">Delete File <%= file.id %></button></form>
+        <form action="/form/delete-file-verify/<%= file.id %>" method="GET"><button type="submit">Delete File <%= file.id %></button></form>
       </li>
     <% }) %>
   </ul>
