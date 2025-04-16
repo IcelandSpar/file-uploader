@@ -57,35 +57,36 @@ const getDownloadFile = (req, res) => {
 }
 
 const getFolderPage = async (req, res) => {
+  const isAuth = isAuthenticated(req.session.passport);
 
-  const folderInfo = await prisma.folders.findFirst({
-    where: {
-      folderName: req.params.folderName,
-      userId: req.session.passport.user,
-    },
-
-  });
-
+  if(isAuth && req.session.passport.user == req.params.id && req.user.username == req.params.user) {
+    const folderInfo = await prisma.folders.findFirst({
+      where: {
+        folderName: req.params.folderName,
+        userId: req.session.passport.user,
+      },
   
+    });
+    
+    const files = await prisma.files.findMany({
+      where: {
+        folderId: folderInfo.id,
+      },
+      include: {
+        folder: true,
+      },
+  
+    })
+  
+    res.render('folder', {
+      postAction: `/folders/${req.params.id}/${req.params.user}/${req.params.folderName}`,
+      files: files,
+    })
+  } else {
+    res.end('Not Authorized')
+  }
 
 
-
-  const files = await prisma.files.findMany({
-    where: {
-      folderId: folderInfo.id,
-    },
-    include: {
-      folder: true,
-    },
-
-  })
-
-
-
-  res.render('folder', {
-    postAction: `/folders/${req.params.id}/${req.params.user}/${req.params.folderName}`,
-    files: files,
-  })
 }
 
 const postFile = async (req, res) => {
