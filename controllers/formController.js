@@ -117,8 +117,7 @@ const getUploadFormPage = (req, res) => {
   res.render('upload-form');
 }
 
-const postUploadForm = (req, res) => {
-  // console.log(req.file)
+const postUploadForm = async (req, res) => {
   res.redirect('/form/upload');
 }
 

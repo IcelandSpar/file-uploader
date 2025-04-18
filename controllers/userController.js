@@ -1,5 +1,7 @@
+require('dotenv').config();
 const { isAuthenticated } = require('./formController');
 const prisma = require('../db/client');
+const supabase = require('../db/supabase-client');
 
 const getUserHomePage = async (req, res) => {
 
@@ -90,6 +92,17 @@ const getFolderPage = async (req, res) => {
 }
 
 const postFile = async (req, res) => {
+
+console.log(req.file)
+  const { data, error } = await supabase
+  .storage
+  .from('file-uploader-app-files')
+  .upload(req.file.path, req.file.buffer, {
+    cacheControl: '3600',
+    contentType: req.file.mimetype,
+  })
+  console.log(error)
+
 
   const folderInfo = await prisma.folders.findFirst({
     where: {
