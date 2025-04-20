@@ -4,7 +4,9 @@ const { getUserHomePage, postNewFolder, getDownloadFile, getFolderPage, postFile
 
 
 const multer = require('multer');
-const upload = multer({dest: 'uploads/'});
+const storage = multer.memoryStorage();
+const upload = multer({storage: storage});
+// const upload = multer({dest: 'uploads/'});
 
 userRouter.get('/download/:fileName', getDownloadFile)
 userRouter.get('/folders/:id/:user', getUserHomePage);

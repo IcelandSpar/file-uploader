@@ -9,6 +9,7 @@ const indexRouter = require('./routes/indexRouter');
 const formRouter = require('./routes/formRouter');
 const passport = require('passport');
 const userRouter = require('./routes/userRouter');
+const cors = require('cors');
 
 
 
@@ -16,6 +17,7 @@ const userRouter = require('./routes/userRouter');
 app.set('views', path.join(__dirname, "views"));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}));
+app.use(cors());
 
 const assetsPath = path.join(__dirname, 'public');
 app.use(express.static(assetsPath));

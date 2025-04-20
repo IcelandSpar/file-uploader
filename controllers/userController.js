@@ -2,6 +2,7 @@ require('dotenv').config();
 const { isAuthenticated } = require('./formController');
 const prisma = require('../db/client');
 const supabase = require('../db/supabase-client');
+const { decode } = require('base64-arraybuffer');
 
 const getUserHomePage = async (req, res) => {
 
@@ -93,16 +94,28 @@ const getFolderPage = async (req, res) => {
 
 const postFile = async (req, res) => {
 
-console.log(req.file)
+    const file = req.file;
+    if(!file) {
+      res.status(400).json({message: "Please upload a file"});
+      return;
+    }
+
+    const fileBase64 = decode(file.buffer.toString("base64"));
+
+
   const { data, error } = await supabase
   .storage
   .from('file-uploader-app-files')
-  .upload(req.file.path, req.file.buffer, {
-    cacheControl: '3600',
+  .upload(`uploads/${file.originalname}`, fileBase64, {
     contentType: req.file.mimetype,
   })
-  console.log(error)
 
+  // const { pubUrlData } = supabase
+  // .storage
+  // .from('file-uploader-app-files')
+  // .getPublicUrl(`uploads/${file.originalname}`);
+  // console.log(data)
+  // console.log(pubUrlData)
 
   const folderInfo = await prisma.folders.findFirst({
     where: {
@@ -115,21 +128,29 @@ console.log(req.file)
   });
 
 
-  await prisma.files.create({
+  const created = await prisma.files.create({
     data: {
       folderId: folderInfo.id,
       userId: parseInt(req.params.id),
       originalName: req.file.originalname,
       encoding: req.file.encoding,
       mimetype: req.file.mimetype,
-      destination: req.file.destination,
-      fileName: req.file.filename,
-      path: req.file.path,
+      destination: `uploads/`,
+      fileName: req.file.originalname,
+      path: `uploads/${file.originalname}`,
       size: req.file.size,
     }
   })
+  // console.log(created)
+ res.redirect(`/folders/${req.params.id}/${req.params.user}/${req.params.folderName}`)
+
+
+
+
+
+
+
   // obj returned: original name, encoding, mimetype, destination, filename, path, size
-  res.redirect(`/folders/${req.params.id}/${req.params.user}/${req.params.folderName}`)
 }
 
 
