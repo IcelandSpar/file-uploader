@@ -53,6 +53,7 @@ model Files {
   mimetype     String  @db.VarChar(255)
   destination  String  @db.VarChar(255)
   fileName     String  @db.VarChar(255)
+  fileUrl      String  @db.VarChar(255)
   path         String  @db.VarChar(255)
   size         Int
 }

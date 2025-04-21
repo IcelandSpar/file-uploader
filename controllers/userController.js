@@ -4,6 +4,8 @@ const prisma = require('../db/client');
 const supabase = require('../db/supabase-client');
 const { decode } = require('base64-arraybuffer');
 const fs = require('fs');
+const prettyBytes = (...args) => import('pretty-bytes').then(({default: prettyBytes}) => prettyBytes(...args));
+
 
 
 
@@ -55,6 +57,14 @@ const postNewFolder = async (req, res) => {
 
 const getDownloadFile = async (req, res) => {
 
+  const fileData = await prisma.files.findFirst({
+    where: {
+      id: parseInt(req.params.fileId)
+    }
+  });
+
+const formattedSize = await prettyBytes(fileData.size);
+
   const { data } = await supabase
   .storage
   .from('file-uploader-app-files')
@@ -62,9 +72,11 @@ const getDownloadFile = async (req, res) => {
     download: true,
   });
 
-  res.end(`
-    <a href='${data.signedUrl}'>download</a>
-    `)
+  res.render('file', {
+    downloadUrl: data.signedUrl,
+    fileData,
+    formattedSize,
+  })
 }
 
 const getFolderPage = async (req, res) => {
@@ -118,12 +130,17 @@ const postFile = async (req, res) => {
     contentType: req.file.mimetype,
   })
 
-  // const { pubUrlData } = supabase
-  // .storage
-  // .from('file-uploader-app-files')
-  // .getPublicUrl(`uploads/${file.originalname}`);
-  // console.log(data)
-  // console.log(pubUrlData)
+  async function getPubUrl(fileOriginalName) {
+    const { data } = supabase
+    .storage
+    .from('file-uploader-app-files')
+    .getPublicUrl(`uploads/${fileOriginalName}`)
+
+    return data
+  }
+
+  const fileUrlData = await getPubUrl(file.originalname);
+
 
   const folderInfo = await prisma.folders.findFirst({
     where: {
@@ -145,6 +162,7 @@ const postFile = async (req, res) => {
       mimetype: req.file.mimetype,
       destination: `uploads/`,
       fileName: req.file.originalname,
+      fileUrl: fileUrlData.publicUrl,
       path: `uploads/${file.originalname}`,
       size: req.file.size,
     }

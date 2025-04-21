@@ -12,7 +12,7 @@
   <ul>
     <% files.forEach((file, indx) => { %>
       <li>
-        <a href="/download/<%= file.fileName %>">
+        <a href="/file/<%= file.id %>/<%= file.fileName %>">
           <p><%= file.originalName %></p>
         </a>
         <p><%= file.fileName %></p>

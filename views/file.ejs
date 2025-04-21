@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File</title>
+</head>
+<body>
+  <h1><%= locals.fileData.fileName %></h1>
+  <a href="<%= locals.fileData.fileUrl  %>">View File</a>
+  <p><a href="<%= locals.downloadUrl %>" download>Download</a> <%=  locals.formattedSize %></p>
+</body>
+</html>

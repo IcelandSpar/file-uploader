@@ -8,7 +8,7 @@ const storage = multer.memoryStorage();
 const upload = multer({storage: storage});
 // const upload = multer({dest: 'uploads/'});
 
-userRouter.get('/download/:fileName', getDownloadFile)
+userRouter.get('/file/:fileId/:fileName', getDownloadFile)
 userRouter.get('/folders/:id/:user', getUserHomePage);
 userRouter.post('/folders/:id/:user', postNewFolder);
 
