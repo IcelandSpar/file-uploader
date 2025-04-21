@@ -3,6 +3,9 @@ const { isAuthenticated } = require('./formController');
 const prisma = require('../db/client');
 const supabase = require('../db/supabase-client');
 const { decode } = require('base64-arraybuffer');
+const fs = require('fs');
+
+
 
 const getUserHomePage = async (req, res) => {
 
@@ -50,13 +53,18 @@ const postNewFolder = async (req, res) => {
   res.redirect(`/folders/${req.params.id}/${req.params.user}`);
 }
 
-const getDownloadFile = (req, res) => {
-  
+const getDownloadFile = async (req, res) => {
 
-
-  res.download(`./uploads/${req.params.fileName}`, (err) => {
-    if(err) res.status(404).json({error: 'File not found'});
+  const { data } = await supabase
+  .storage
+  .from('file-uploader-app-files')
+  .createSignedUrl(`uploads/${req.params.fileName}`, 60, {
+    download: true,
   });
+
+  res.end(`
+    <a href='${data.signedUrl}'>download</a>
+    `)
 }
 
 const getFolderPage = async (req, res) => {

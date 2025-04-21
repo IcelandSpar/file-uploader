@@ -12,9 +12,10 @@
   <ul>
     <% files.forEach((file, indx) => { %>
       <li>
-        <p><%= file.originalName %></p>
+        <a href="/download/<%= file.fileName %>">
+          <p><%= file.originalName %></p>
+        </a>
         <p><%= file.fileName %></p>
-        <a href="/download/<%= file.fileName %>">Download</a>
         <form action="/form/delete-file-verify/<%= file.id %>" method="GET"><button type="submit">Delete File <%= file.id %></button></form>
       </li>
     <% }) %>
