@@ -5,15 +5,26 @@
   --green: #BDDDE4;
 }
 
+.spectral-extralight {
+  font-family: "Spectral", serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Spectral";
 }
+
+
 
 header {
   background-color: var(--lighter-blue);
-
+  position: sticky;
+  top: 0;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
 .navbar {
@@ -23,30 +34,100 @@ header {
   display: flex;
   gap: 1rem;
   align-items: center;
+  font-size: 1.2rem;
+
 }
 .navbar a {
   color: black;
 }
 
 .indexMainCont {
+  background-image: linear-gradient(var(--darker-blue), var(--lighter-blue));
+}
+
+.indexMaxWidthParaAndImageCont {
+
+}
+
+.textPictureContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 2rem;
+  font-size: 2rem;
+  text-align: center;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
 }
 
-.textPictureContainer {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  font-size: 2rem;
-  text-align: center;
-  align-items: center;
+.indexWhiteSection {
+  background-color: var(--light)
 }
 
 .cloudGuyLadderImg, .foldersIndexImg, .fileDrawerIndexImg, .shareHexIcon {
-  margin-top: 2rem;
   border-radius: 15px;
   width: 50%;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.cloudGuyImgContainer {
+  width: 50%;
+  border-radius: 15px;
+
+  overflow: hidden;
+}
+
+.cloudGuyLadderImg {
+  width: 100%;
+  object-fit: cover;
+}
+
+.indexThreeIconGrid {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  font-size: 1.5rem;
+  /* max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  gap: 1rem;
+  text-align: center; */
+}
+
+.indexThreeIconGrid div {
+  flex-basis: 350px;
+  min-height: 200px;
+}
+
+.indexThreeIconGrid div {
+  min-width: 0;
+}
+
+
+.foldersIndexImg {
+  object-fit: cover;
+
+}
+
+.fileDrawerIndexImg {
+
 }
 
 h1 {
@@ -55,4 +136,11 @@ h1 {
 
 .homeBody {
   background-color: var(--light);
+}
+
+
+@media (max-width: 600px) {
+  .textPictureContainer {
+    grid-template-columns: 1fr;
+  }
 }

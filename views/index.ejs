@@ -6,34 +6,68 @@
   <title>Home</title>
 
   <link rel="stylesheet" href="/styles.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
 </head>
 <body class="homeBody">
   <%-include('partials/nav-bar') %>
   <main class="indexMainCont">
-    <div class="textPictureContainer">
-      <p>Upload your files to the cloud with our simple service!</p>
-      <img class="cloudGuyLadderImg" src="/cloud-guy-ladder.png" alt="person climbing up ladder placing a cloud." width="300px">
+    <div class="indexMaxWidthParaAndImageCont">
+      <div class="textPictureContainer">
+        <p>Upload your files to the cloud with our simple service!</p>
+            <!-- Image by <a href="https://pixabay.com/users/talhakhalil007-5671515/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4273197">talha khalil</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4273197">Pixabay</a> -->
+        <div class="cloudGuyImgContainer"><img class="cloudGuyLadderImg" src="/cloud-guy-ladder.png" alt="person climbing up ladder placing a cloud." width="300px"></div>
+      </div>
     </div>
-    <div class="textPictureContainer">
-      <img  class="foldersIndexImg" src="/folder.png" alt="folders" width="300px">
-      <!-- Image by <a href="https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=146153">OpenClipart-Vectors</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=146153">Pixabay</a> -->
-      <p>Store your files in folders to keep them organized to your liking.</p>
+    <div class="indexWhiteSection">
+      <div class="indexThreeIconGrid ">
+        <div>
+          <img src="/upload-file.png" alt="upload to cloud" width="100px">
+          <!-- <a href="https://www.flaticon.com/free-icons/upload-file" title="upload file icons">Upload file icons created by berkahicon - Flaticon</a> -->
+          <p>Easily upload to the cloud.</p>
+        </div>
+        <div>
+          <img src="/database-management.png" alt="database" width="100px">
+          <!-- <a href="https://www.flaticon.com/free-icons/data-source" title="data source icons">Data source icons created by Vectorslab - Flaticon</a> -->
+          <p>We use Supabase to store and serve your files.</p>
+        </div>
+        <div>
+          <img src="/save.png" alt="floppy disk" width="100px">
+          <!-- <a href="https://www.flaticon.com/free-icons/save" title="save icons">Save icons created by Flat Icons - Flaticon</a> -->
+          <p>Download and view your documents!</p>
+        </div>
+      </div>
     </div>
-    <div class="textPictureContainer">
-      <p>You can create, edit, and delete folders !</p>
-      <img class="fileDrawerIndexImg" src="/archive.png" alt="File drawer" width="300px">
+    <div class="indexMaxWidthParaAndImageCont">
+      <div class="textPictureContainer">
+        <p>You can create, edit, and delete folders !</p>
+        <!-- Image by <a href="https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=154686">OpenClipart-Vectors</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=154686">Pixabay</a> -->
+        <img class="fileDrawerIndexImg" src="/archive-cropped.png" alt="File drawer" width="300px">
+      </div>
+    </div>
+    <div class="indexMaxWidthParaAndImageCont indexWhiteSection">
+      <div class="textPictureContainer">
+        <img  class="foldersIndexImg" src="/folder.png" alt="folders" width="300px">
+        <!-- Image by <a href="https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=146153">OpenClipart-Vectors</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=146153">Pixabay</a> -->
+        <p>Store your files in folders to keep them organized to your liking.</p>
+      </div>
+    </div>
 
+
+
+    <div class="indexMaxWidthParaAndImageCont">
+      <div class="textPictureContainer">
+        <img  class="shareHexIcon" src="/hexagon.png" alt="share icon" width="300px">
+        <p>Share your files to colleagues !</p>
+        <!-- Image by <a href="https://pixabay.com/users/janjf93-3084263/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2307352">Jan</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2307352">Pixabay</a> -->
+      </div>
     </div>
-    <div class="textPictureContainer">
-      <img  class="shareHexIcon" src="/hexagon.png" alt="share icon" width="300px">
-      <p>Share your files to colleagues !</p>
-      <!-- Image by <a href="https://pixabay.com/users/janjf93-3084263/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2307352">Jan</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2307352">Pixabay</a> -->
-    </div>
-    <!-- Image by <a href="https://pixabay.com/users/talhakhalil007-5671515/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4273197">talha khalil</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4273197">Pixabay</a> -->
   </main>
-  <h3>Home Test</h3>
+  <!-- <h3>Home Test</h3>
   <h4><%= locals.isAuth ? 'You Are Authenticated' : 'Begone! You are not allowed.' %></h4>
   <p><%= locals.loggedInUsername %></p>
-  <p><%= locals.loggedInUserId %></p>
+  <p><%= locals.loggedInUserId %></p> -->
 </body>
 </html>
