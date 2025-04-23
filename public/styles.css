@@ -12,12 +12,13 @@
 }
 
 header {
-  max-width: 1200px;
-  margin: 0 auto;
+  background-color: var(--lighter-blue);
+
 }
 
 .navbar {
-  background-color: var(--lighter-blue);
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 1rem;
   display: flex;
   gap: 1rem;
@@ -42,7 +43,8 @@ header {
   align-items: center;
 }
 
-.cloudGuyLadderImg {
+.cloudGuyLadderImg, .foldersIndexImg, .fileDrawerIndexImg, .shareHexIcon {
+  margin-top: 2rem;
   border-radius: 15px;
   width: 50%;
 }
