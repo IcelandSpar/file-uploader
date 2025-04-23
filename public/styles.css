@@ -1,3 +1,56 @@
+:root {
+  --light: #FFF1D5;
+  --darker-blue: #9FB3DF;
+  --lighter-blue: #9EC6F3;
+  --green: #BDDDE4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar {
+  background-color: var(--lighter-blue);
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.navbar a {
+  color: black;
+}
+
+.indexMainCont {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.textPictureContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 2rem;
+  text-align: center;
+  align-items: center;
+}
+
+.cloudGuyLadderImg {
+  border-radius: 15px;
+  width: 50%;
+}
+
 h1 {
   color: red;
+}
+
+.homeBody {
+  background-color: var(--light);
 }

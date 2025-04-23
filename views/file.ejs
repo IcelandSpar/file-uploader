@@ -7,7 +7,8 @@
 </head>
 <body>
   <h1><%= locals.fileData.fileName %></h1>
-  <a href="<%= locals.fileData.fileUrl  %>">View File</a>
+  <p>File Type: <%=  fileData.mimetype %></p>
+  <a href="<%= locals.fileData.fileUrl  %>" target="_blank">View File</a>
   <p><a href="<%= locals.downloadUrl %>" download>Download</a> <%=  locals.formattedSize %></p>
 </body>
 </html>

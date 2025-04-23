@@ -7,10 +7,17 @@
 
   <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+<body class="homeBody">
   <%-include('partials/nav-bar') %>
-  <h1>Home Test</h1>
-  <h2><%= locals.isAuth ? 'You Are Authenticated' : 'Begone! You are not allowed.' %></h2>
+  <main class="indexMainCont">
+    <div class="textPictureContainer">
+      <p>Upload your files to the cloud with our simple service!</p>
+      <img class="cloudGuyLadderImg" src="/cloud-guy-ladder.png" alt="person climbing up ladder placing a cloud." width="300px">
+    </div>
+    <!-- Image by <a href="https://pixabay.com/users/talhakhalil007-5671515/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4273197">talha khalil</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4273197">Pixabay</a> -->
+  </main>
+  <h3>Home Test</h3>
+  <h4><%= locals.isAuth ? 'You Are Authenticated' : 'Begone! You are not allowed.' %></h4>
   <p><%= locals.loggedInUsername %></p>
   <p><%= locals.loggedInUserId %></p>
 </body>

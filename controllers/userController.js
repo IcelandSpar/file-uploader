@@ -71,6 +71,9 @@ const formattedSize = await prettyBytes(fileData.size);
   .createSignedUrl(`uploads/${req.params.fileName}`, 60, {
     download: true,
   });
+  
+
+  console.log(fileData);
 
   res.render('file', {
     downloadUrl: data.signedUrl,
