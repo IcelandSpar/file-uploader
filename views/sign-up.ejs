@@ -16,7 +16,7 @@
     <div class="folderFlap">Register</div>
   </div>
   <main class="formContainer">
-    <h1 class="formHeading">Register for an account !</h1>
+    <h1 class="formHeading">Create an Account</h1>
     <% if(locals.errors) { %>
       <section>
         <h2>Please Fix the errors:</h2>
@@ -29,14 +29,20 @@
     <% } %>
       <p><%= locals.userTakenMsg  %></p>
     <form action="/form/sign-up" method="POST" class="registerForm">
-      <label for="username">Username: </label>
-      <input type="text" name="username" id="username">
+      <label class="registerLabels" for="username">Username: </label>
+      <div class="registerInputAndImgCont">
+        <img class="inputIcon" src="/account-circle.png" alt="account username" width="30px" height="30px">
+        <input type="text" name="username" id="username" class="registerInput" placeholder="Enter your username">
+      </div>
 
-      <label for="password">Password: </label>
+      <label class="registerLabels" for="password">Password: </label>
 
-      <input type="password" name="password" id="password">
+      <div class="registerInputAndImgCont">
+        <img class="inputIcon" src="/lock.png" alt="account password" width="30px" height="30px">
+        <input type="password" name="password" id="password" class="registerInput" placeholder="Enter your password">
+      </div>
 
-      <button>Submit</button>
+      <button class="registerSubmitBtn">Submit</button>
     </form>
   </main>
 </body>
