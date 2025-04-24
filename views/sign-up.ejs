@@ -23,17 +23,20 @@
           <!-- <a href="https://www.flaticon.com/free-icons/pin" title="pin icons">Pin icons created by Pixel perfect - Flaticon</a> -->
           <%  errors.forEach((errObj) => { %>
             <li class="errorLi">
-              <img src="/pin.png" alt="pin bullet point" width="25px">
+              <img class="pinBulletImg" src="/pin.png" alt="pin bullet point" width="25px">
               <p><%= errObj.msg %></p>
             </li>
           <% }) %>
       </ul>
       </section>
     <% } %>
+    <% if(locals.userTakenMsg) { %>
       <div class="usernameTakenCont">
-        <img src="/pin.png" alt="pin bullet point" width="25px" height="25px">
+        <img class="pinBulletImg"  src="/pin.png" alt="pin bullet point" width="25px" height="25px">
         <p class="usernameTakeMsg"><%= locals.userTakenMsg  %></p>
       </div>
+    <% } %>
+
     <form action="/form/sign-up" method="POST" class="registerForm">
       <h1 class="formHeading">Create an Account</h1>
       <label class="registerLabels" for="username">Username: </label>
