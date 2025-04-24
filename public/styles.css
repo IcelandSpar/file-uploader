@@ -152,6 +152,7 @@ header {
 .folderFlap {
   background-color: var(--light);
   width: min-content;
+  text-wrap: nowrap;
   padding: 5px 10px;
   border-radius: 15px 15px 0 0;
   font-size: 1.3rem;
@@ -179,7 +180,6 @@ header {
 .registerInput {
   padding: 1rem .5rem 1rem 3rem;
   border: none;
-  border-bottom: 5px solid var(--green);
   width: 100%;
   font-size: 1.5rem;
 }
@@ -190,6 +190,8 @@ header {
 
 .registerInputAndImgCont {
   position: relative;
+  border-bottom: 5px solid var(--green);
+
 }
 
 .inputIcon {
