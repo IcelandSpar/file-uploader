@@ -19,11 +19,14 @@
 
   <main class="formContainer">
     <% if(locals.errors) { %>
-      <section>
-        <h2>Please Fix the errors:</h2>
-        <ul>
+      <section class="errorSect">
+        <h2 class="errorHeading">Please Fix the errors:</h2>
+        <ul class="errorUl">
           <%  errors.forEach((errObj) => { %>
-            <li><%= errObj.msg %></li>
+            <li class="errorLi">
+              <img src="/pin.png" alt="pin bullet point" width="25px">
+              <p><%= errObj.msg %></p>
+            </li>
           <% }) %>
       </ul>
       </section>

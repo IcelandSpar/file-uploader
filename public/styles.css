@@ -171,6 +171,31 @@ header {
   text-align: center;
 }
 
+.errorSect {
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.errorUl {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.errorLi {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.usernameTakenCont {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+}
+
 .registerForm {
   display: grid;
   grid-template-columns: 1fr;

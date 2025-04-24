@@ -16,19 +16,26 @@
     <div class="folderFlap">Register</div>
   </div>
   <main class="formContainer">
-    <h1 class="formHeading">Create an Account</h1>
     <% if(locals.errors) { %>
-      <section>
-        <h2>Please Fix the errors:</h2>
-        <ul>
+      <section class="errorSect">
+        <h2 class="errorHeading">Please Fix the errors:</h2>
+        <ul class="errorUl">
+          <!-- <a href="https://www.flaticon.com/free-icons/pin" title="pin icons">Pin icons created by Pixel perfect - Flaticon</a> -->
           <%  errors.forEach((errObj) => { %>
-            <li><%= errObj.msg %></li>
+            <li class="errorLi">
+              <img src="/pin.png" alt="pin bullet point" width="25px">
+              <p><%= errObj.msg %></p>
+            </li>
           <% }) %>
       </ul>
       </section>
     <% } %>
-      <p><%= locals.userTakenMsg  %></p>
+      <div class="usernameTakenCont">
+        <img src="/pin.png" alt="pin bullet point" width="25px" height="25px">
+        <p class="usernameTakeMsg"><%= locals.userTakenMsg  %></p>
+      </div>
     <form action="/form/sign-up" method="POST" class="registerForm">
+      <h1 class="formHeading">Create an Account</h1>
       <label class="registerLabels" for="username">Username: </label>
       <div class="registerInputAndImgCont">
         <img class="inputIcon" src="/account-circle.png" alt="account username" width="30px" height="30px">
