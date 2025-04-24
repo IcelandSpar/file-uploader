@@ -130,14 +130,45 @@ header {
 
 }
 
-h1 {
-  color: red;
-}
 
 .homeBody {
   background-color: var(--light);
 }
 
+.registerBody {
+  background-color: var(--darker-blue);
+}
+
+.folderFlapCont {
+  max-width: 500px;
+  margin: 3rem auto 0 auto;
+}
+
+.folderFlap {
+  background-color: var(--light);
+  width: min-content;
+  padding: 5px;
+  border-radius: 15px 15px 0 0;
+
+}
+
+.formContainer {
+  background-color: var(--light);
+  max-width: 500px;
+  border-radius: 0 15px 15px 15px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+}
+
+.formHeading {
+  text-align: center;
+}
+
+.registerForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1rem;
+}
 
 @media (max-width: 600px) {
   .textPictureContainer {
