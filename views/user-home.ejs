@@ -30,6 +30,7 @@
                   </div>
                 </a>
                 <p><%= item.description %></p>
+                <p>Created: <%= item.formattedDates.createDateTime[1] %><%= item.formattedDates.createDateTime[0] %></p>
                 <button class="editFolderModalBtn<%= indx %>" type="button">Edit</button>
                 <button type="button" class="deleteFolderBtn<%= indx %>">Delete</button>
               </div>

@@ -283,7 +283,9 @@ header {
   width: 30%;
   height: 1.2rem;
   padding: .5rem 1rem;
-  border-radius: 15px 15px 0 0;
+  border-radius: 15px 15px 0px 0px;
+  border-top-right-radius: 50px solid transparent;
+  
 }
 
 .folderTitleContainer {

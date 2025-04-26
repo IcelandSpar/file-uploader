@@ -5,7 +5,7 @@ const supabase = require('../db/supabase-client');
 const { decode } = require('base64-arraybuffer');
 const fs = require('fs');
 const prettyBytes = (...args) => import('pretty-bytes').then(({default: prettyBytes}) => prettyBytes(...args));
-
+const  { format } = require("date-fns");
 
 
 
@@ -23,12 +23,26 @@ const getUserHomePage = async (req, res) => {
     }
   })
 
+
+
+    let formattedUsersFolders = usersFolders.map((folder, index) => {
+
+      return {
+        ...folder,
+        formattedDates: {
+          createDateTime: [format(usersFolders[index].created, 'MMM dd yyy'), format(usersFolders[index].created, 'p')],
+          modifiedDateTime: [format(usersFolders[index].modified, 'MMM dd yyy'), format(usersFolders[index].modified, 'p')],
+        }
+      }
+    });
+
+
   
 
 
   if(isAuth && req.session.passport.user == req.params.id && req.user.username == req.params.user) {
     res.render('user-home', {
-      usersFolders,
+      usersFolders: formattedUsersFolders,
       loggedInUserId: req.params.id,
       loggedInUsername: req.params.user,
       isAuth,
