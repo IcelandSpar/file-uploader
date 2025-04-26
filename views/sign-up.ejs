@@ -32,7 +32,7 @@
     <% } %>
     <% if(locals.userTakenMsg) { %>
       <div class="usernameTakenCont">
-        <img class="pinBulletImg"  src="/pin.png" alt="pin bullet point" width="25px" height="25px">
+        <img class="pinBulletImg" src="/pin.png" alt="pin bullet point" width="25px" height="25px">
         <p class="usernameTakeMsg"><%= locals.userTakenMsg  %></p>
       </div>
     <% } %>
@@ -51,7 +51,7 @@
         <img class="inputIcon" src="/lock.png" alt="account password" width="30px" height="30px">
         <input type="password" name="password" id="password" class="registerInput" placeholder="Enter your password">
       </div>
-
+      <a class="haveAnAccountAnchor" href="/form/log-in">Already have an account?</a>
       <button class="registerSubmitBtn">Submit</button>
     </form>
   </main>

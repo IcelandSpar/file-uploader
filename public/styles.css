@@ -171,6 +171,11 @@ header {
   text-align: center;
 }
 
+.haveAnAccountAnchor {
+  margin: 0 0 0 auto;
+  color: darkolivegreen;
+}
+
 .errorSect {
   margin: 0 auto;
   text-align: center;
@@ -236,6 +241,54 @@ header {
   border-radius: 40px;
   border: none;
   font-weight: 700;
+}
+
+.foldersBody {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: linear-gradient(var(--darker-blue), var(--lighter-blue));
+}
+
+.foldersMainCont {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.foldersUl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  list-style-type: none;
+  padding: none;
+  margin: none;
+}
+
+.foldersLi {
+
+
+}
+
+.foldersCont {
+  background-color: var(--light);
+  padding: 1rem;
+  border-radius: 0 15px 15px 15px;
+  height: 100%;
+}
+
+.foldersFlap {
+  background-color: var(--light);
+  width: 30%;
+  height: 1.2rem;
+  padding: .5rem 1rem;
+  border-radius: 15px 15px 0 0;
+}
+
+.folderTitleContainer {
+  display: flex;
+  gap: .5rem;
 }
 
 @keyframes  pinBullet {
