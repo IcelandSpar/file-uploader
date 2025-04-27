@@ -15,7 +15,7 @@
   <%-include('partials/nav-bar') %>
   <main class="foldersMainCont">
     <section>
-      <h1>Folders</h1>
+      <h1 class="foldersHeading"><%= locals.loggedInUsername %>'s folders:</h1>
       <% if(locals.usersFolders) { %>
         <ul class="foldersUl">
           <% locals.usersFolders.forEach((item, indx) => { %>
@@ -29,10 +29,14 @@
                     <p><%= item.folderName %></p>
                   </div>
                 </a>
-                <p><%= item.description %></p>
-                <p>Created: <%= item.formattedDates.createDateTime[1] %><%= item.formattedDates.createDateTime[0] %></p>
-                <button class="editFolderModalBtn<%= indx %>" type="button">Edit</button>
-                <button type="button" class="deleteFolderBtn<%= indx %>">Delete</button>
+                <p>Description: <%= item.description %></p>
+                <p>Created: <%= item.formattedDates.createDateTime[1] %>, <%= item.formattedDates.createDateTime[0] %></p>
+                <p>Last Modified: <%= item.formattedDates.modifiedDateTime[1] %>, <%= item.formattedDates.modifiedDateTime[0] %></p>
+                <p>Shared: </p>
+                <div class="editDeleteFileBtnsContainer">
+                  <button class="editFolderModalBtn<%= indx %> editFolderBtn" type="button"><img src="/edit.svg" alt="edit file" width="24px"></button>
+                  <button type="button" class="deleteFolderBtn<%= indx %> deleteFolderBtn"><img src="/delete.svg" alt="delete file" width="24px"></button>
+                </div>
               </div>
             </li>
             <dialog class="editFolderModal<%= indx %>">
@@ -117,7 +121,9 @@
       <button type="button" class="exitBtn">Exit</button>
     </form>
   </dialog>
-  <button class="createFolderBtn">Create A New Folder</button>
+  <div class="createFolderBtnContainer">
+    <button class="createFolderBtn">Create A New Folder</button>
+  </div>
 </main>
   <script>
     const createFolderBtn = document.querySelector('.createFolderBtn');
