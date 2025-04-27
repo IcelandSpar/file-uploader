@@ -39,27 +39,35 @@
                 </div>
               </div>
             </li>
-            <dialog class="editFolderModal<%= indx %>">
+            <dialog class="editFolderModal<%= indx %> editFolderModal">
               <form action="/form/edit-folder/<%= item.id %>" method="POST">
+                <h4 class="modalHeading">Editing Folder: </h4>
+                <p class="modalFolderName"><%= item.folderName %></p>
+                <br>
                 <label for="editFolderName">Folder Name: </label>
                 <br>
-                <input type="text" class="editFolderNameInput<%= indx %>" name="editFolderName" id="editFolderName<%= indx %>">
+                <input type="text" class="editFolderNameInput<%= indx %> folderNameInput" name="editFolderName" id="editFolderName<%= indx %>">
                 <br>
                 <label for="editFolderDescription">Folder Description: </label>
                 <br>
-                <input type="text" class="editFolderDescriptionInput<%= indx %>" name="editFolderDescription" id="editFolderDescription<%= indx %>">
+                <!-- <input type="text" class="editFolderDescriptionInput<%= indx %>" name="editFolderDescription" id="editFolderDescription<%= indx %>"> -->
+                <textarea name="editFolderDescriptionInput<%= indx %>" id="editFolderDescriptionInput<%= indx %>" class="editFolderDescriptionInput<%= indx %> folderDescriptionTextArea"></textarea>
                 <br>
-                <button type="submit">Submit</button>
-                <button type="button" class="exitEditFolderModalBtn<%= indx %>">Exit</button>
+                <div class="createFolderModalBtnsCont">
+                  <button type="button" class="exitEditFolderModalBtn<%= indx %>">Exit</button>
+                  <button type="submit">Submit</button>
+                </div>
               </form>
             </dialog>
 
-            <dialog class="deleteFolderModal<%= indx %>">
+            <dialog class="deleteFolderModal<%= indx %> deleteFolderModal">
               <form action="/form/delete-folder/<%= item.id %>" method="POST">
-                <h3>Are you sure you want to delete <%= item.folderName %>?</h3>
-                <p>All Files inside folder will be permanently deleted !</p>
-                <button value='<%= item.id %>' name="folderId" type="submit" class="deleteFolderModalBtn<%= indx %>">Delete</button>
-                <button  type="button" class="deleteFolderModalExit<%= indx %>">Exit</button>
+                <h3>Are you sure you want to <mark class="deleteMark">delete</mark> <%= item.folderName %>?</h3>
+                <p>All files inside folder will be <mark class="deleteMark">permanently deleted!</mark></p>
+                <div class="createFolderModalBtnsCont">
+                  <button  type="button" class="deleteFolderModalExit<%= indx %>">Exit</button>
+                  <button value='<%= item.id %>' name="folderId" type="submit" class="deleteFolderModalBtn<%= indx %> deleteFolderModalBtn">Delete</button>
+                </div>
               </form>
             </dialog>
           
@@ -109,6 +117,8 @@
 
   <dialog class="createFolderModal">
     <form method="POST">
+      <h4 class="modalHeading">Creating Folder: </h4>
+
       <label for="folderName">Folder Name: </label>
       <br>
       <input class="folderNameInput" type="text" name="folderName" id="folderName">

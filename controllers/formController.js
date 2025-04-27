@@ -103,7 +103,7 @@ const postLogInForm = [
   return res.status(400).render('log-in', {errors: errors.array()})
 
   } else {
-    passport.authenticate('local', {failureRedirect: '/form/log-in', successRedirect: '/', failureMessage: true})(req, res)
+    passport.authenticate('local', {failureRedirect: '/form/log-in', successRedirect: `/folders/${req.user.id}/${req.user.username}`, failureMessage: true})(req, res)
 
   }
   
