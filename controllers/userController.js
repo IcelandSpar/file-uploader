@@ -37,9 +37,6 @@ const getUserHomePage = async (req, res) => {
     });
 
 
-  console.log(formattedUsersFolders)
-
-
   if(isAuth && req.session.passport.user == req.params.id && req.user.username == req.params.user) {
     res.render('user-home', {
       usersFolders: formattedUsersFolders,

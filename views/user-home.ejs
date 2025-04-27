@@ -32,10 +32,10 @@
                 <p>Description: <%= item.description %></p>
                 <p>Created: <%= item.formattedDates.createDateTime[1] %>, <%= item.formattedDates.createDateTime[0] %></p>
                 <p>Last Modified: <%= item.formattedDates.modifiedDateTime[1] %>, <%= item.formattedDates.modifiedDateTime[0] %></p>
-                <p>Shared: </p>
+                <p>Shared: <%= item.shared ? '✔️ Shared' : '❌, Not Shared' %></p>
                 <div class="editDeleteFileBtnsContainer">
-                  <button class="editFolderModalBtn<%= indx %> editFolderBtn" type="button"><img src="/edit.svg" alt="edit file" width="24px"></button>
-                  <button type="button" class="deleteFolderBtn<%= indx %> deleteFolderBtn"><img src="/delete.svg" alt="delete file" width="24px"></button>
+                  <button class="editFolderModalBtn<%= indx %> editFolderBtn" type="button"><img class="editFolderImg" src="/edit.svg" alt="edit file" width="24px"></button>
+                  <button type="button" class="deleteFolderBtn<%= indx %> deleteFolderBtn"><img class="deleteFolderImg" src="/delete.svg" alt="delete file" width="24px"></button>
                 </div>
               </div>
             </li>
@@ -111,14 +111,16 @@
     <form method="POST">
       <label for="folderName">Folder Name: </label>
       <br>
-      <input type="text" name="folderName" id="folderName">
+      <input class="folderNameInput" type="text" name="folderName" id="folderName">
       <br>
       <label for="folderDescription">Folder Description: </label>
       <br>
-      <input type="text" id="folderDescription" name="folderDescription">
+      <textarea class="folderDescriptionTextArea" name="folderDescription" id="folderDescription"></textarea>
       <br>
-      <button type="submit">Submit</button>
-      <button type="button" class="exitBtn">Exit</button>
+      <div class="createFolderModalBtnsCont">
+        <button type="button" class="exitBtn">Exit</button>
+        <button type="submit">Submit</button>
+      </div>
     </form>
   </dialog>
   <div class="createFolderBtnContainer">
