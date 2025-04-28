@@ -332,6 +332,11 @@ header {
 
 .deleteFolderBtn {
   filter: invert(8%) sepia(93%) saturate(7188%) hue-rotate(1deg) brightness(95%) contrast(106%);
+
+}
+
+.deleteFolderBtn:hover .deleteFolderImg, .deleteFolderBtn:focus .deleteFolderImg {
+  animation: 1.5s shake infinite ease-out;
 }
 
 .editFolderBtn:hover .editFolderImg, .editFolderBtn:focus .editFolderImg {
@@ -404,6 +409,149 @@ font-weight: 750;
   border: 3px solid #c93838;
 }
 
+.openFolderImg {
+  width: 45px;
+  filter: invert(93%) sepia(16%) saturate(940%) hue-rotate(311deg) brightness(107%) contrast(108%);
+}
+
+.folderViewBody {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: linear-gradient(var(--darker-blue), var(--lighter-blue));
+}
+
+.folderViewMain {
+  height: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+
+.folderPageIconHeadingCont {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 5px solid var(--light);
+}
+
+.uploadAFileForm {
+  margin: 2rem 0;
+}
+
+.uploadAFileLabel {
+  font-size: 2rem;
+}
+
+input[type='file'] {
+  position: relative;
+  width: 100%;
+}
+
+input[type='file']::file-selector-button {
+ 
+  border-radius: 4px;
+  padding: 0 16px;
+  height: 40px;
+  cursor: pointer;
+  background-color: whitesmoke;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+  margin-right: 16px;
+  transition: background-color 200ms;
+}
+
+input[type="file"]::file-selector-button {
+  width: 136px;
+  color: transparent;
+}
+
+
+input[type="file"]::before {
+  position: absolute;
+  pointer-events: none;
+  top: 10px;
+  left: 16px;
+  height: 20px;
+  width: 20px;
+  content: "";
+  background-image: url("/upload-file-google-icon.svg");
+}
+
+input[type="file"]::after {
+  position: absolute;
+  pointer-events: none;
+  top: 11px;
+  left: 40px;
+  color: #0964b0;
+  content: "Upload File";
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #f3f4f6;
+}
+
+/* file upload button active state */
+input[type="file"]::file-selector-button:active {
+  background-color: #e5e7eb;
+}
+
+.fileSubmitAndResetBtnCont {
+  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end
+}
+
+.uploadFileBtn, .resetFileBtn {
+  display: flex;
+  padding: .5rem 1rem;
+  align-items: center;
+}
+
+.filesUl {
+  list-style-type: none;
+
+}
+
+.filesLi {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 3px solid var(--green);
+}
+
+.fileLinkFolderView {
+  display: flex;
+  gap: .5rem;
+  font-size: 1.5rem;
+  
+}
+
+.fileLinkImgFolderView {
+  width: 40px;
+}
+
+.deleteFileBtnFolderView {
+  display: flex;
+  gap: 1rem;
+
+  align-items: center;
+  filter: invert(8%) sepia(93%) saturate(7188%) hue-rotate(1deg) brightness(95%) contrast(106%);
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.deleteFileBtnFolderView img {
+  width: 40px;
+}
+
+
+
 @keyframes twitch {
   from {
     transform: rotate(0deg);
@@ -450,6 +598,32 @@ font-weight: 750;
   }
 
   100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes shake {
+  from {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(-30deg);
+  }
+
+  20% {
+    transform: rotate(0deg);
+  }
+
+  30% {
+    transform: rotate(30deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  to {
     transform: rotate(0deg);
   }
 }

@@ -1,8 +1,21 @@
 
-  <form action="<%= locals.postAction %>" method="POST" enctype="multipart/form-data">
-    <label for="uploadedFile">Upload a file: </label>
+  <form class="uploadAFileForm" action="<%= locals.postAction %>" method="POST" enctype="multipart/form-data">
+    <label for="uploadedFile" class="uploadAFileLabel">Upload a file: </label>
     <br>
-    <input type="file" name="uploadedFile" id="uploadedFile">
+    <input type="file" name="uploadedFile" id="uploadedFile" class="uploadFileInput" required>
     <br>
-    <button>Submit</button>
+    <div class="fileSubmitAndResetBtnCont">
+      <button type="button" class="resetFileBtn"><img src="/refresh.svg" alt="reset"><p>Reset File</p></button>
+      <button type="submit" class="uploadFileBtn"><img src="/upload.svg" alt="upload"><p>Upload File</p></button>
+    </div>
   </form>
+  <script>
+    const fileUploadInput = document.getElementById('uploadedFile');
+    const resetFileBtn = document.querySelector('.resetFileBtn');
+
+    resetFileBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      fileUploadInput.value = '';
+    })
+
+  </script>

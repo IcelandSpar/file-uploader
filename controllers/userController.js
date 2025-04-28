@@ -84,7 +84,7 @@ const formattedSize = await prettyBytes(fileData.size);
   });
   
 
-  console.log(fileData);
+
 
   res.render('file', {
     downloadUrl: data.signedUrl,
@@ -118,6 +118,8 @@ const getFolderPage = async (req, res) => {
     res.render('folder', {
       postAction: `/folders/${req.params.id}/${req.params.user}/${req.params.folderName}`,
       files: files,
+      isAuth,
+      folderInfo,
     })
   } else {
     res.end('Not Authorized')
@@ -181,34 +183,10 @@ const postFile = async (req, res) => {
       size: req.file.size,
     }
   })
-  // console.log(created)
+
  res.redirect(`/folders/${req.params.id}/${req.params.user}/${req.params.folderName}`)
 
-
-
-
-
-
-
-  // obj returned: original name, encoding, mimetype, destination, filename, path, size
 }
-
-
-// model Files {
-//   id           Int     @id @default(autoincrement())
-//   folder       Folders @relation(fields: [folderId], references: [id])
-//   folderId     Int
-//   user         Users   @relation(fields: [userId], references: [id])
-//   userId       Int
-//   originalName String  @db.VarChar(255)
-//   encoding     String  @db.VarChar(255)
-//   mimetype     String  @db.VarChar(255)
-//   destination  String  @db.VarChar(255)
-//   fileName     String  @db.VarChar(255)
-//   path         String  @db.VarChar(255)
-//   size         Int
-// }
-
 
 
 module.exports = {
