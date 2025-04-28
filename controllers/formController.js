@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const passport = require('passport');
 const { unlink } = require('node:fs');
+const supabase = require('../db/supabase-client');
 
 
 const validateUser = [
@@ -24,7 +25,6 @@ const getSignUpFormPage = async (req, res) => {
 
   });
 
-  // console.log(usersDbTest);
 
   res.render('sign-up');
 };
@@ -112,11 +112,6 @@ const postLogInForm = [
     passport.authenticate('local', {failureRedirect: '/form/log-in', successRedirect: `/folders/${user.id}/${user.username}`, failureMessage: true})(req, res);
 
   }
-  
-
-
-  // res.redirect(`/${req.user.id}/${req.user.username}`)
-  // isAuth: isAuthenticated(req.session.passport),
 }]
 
 const getUploadFormPage = (req, res) => {
@@ -188,10 +183,16 @@ const postDeleteFile = async (req, res) => {
     }
   });
 
-  unlink(fileFolderOrigin.path, (err) => {
-    if(err) throw err;
-    console.log(`${fileFolderOrigin.path} was deleted.`);
-  })
+
+  // unlink(fileFolderOrigin.path, (err) => {
+  //   if(err) throw err;
+  //   console.log(`${fileFolderOrigin.path} was deleted.`);
+  // })
+
+  const { data, error } = await supabase
+  .storage
+  .from('file-uploader-app-files')
+  .remove([fileFolderOrigin.path]);
 
 
 
@@ -199,13 +200,12 @@ const postDeleteFile = async (req, res) => {
 };
 
 const getCheckIfUserWillDelete = async (req, res) => {
-  console.log(req.params.fileId)
+
   const fileToBeDeleted = await prisma.files.findFirst({
     where: {
       id: parseInt(req.params.fileId),
     }
   });
-  console.log(fileToBeDeleted)
 
   res.render('verify-delete-file', {
     file: fileToBeDeleted,
