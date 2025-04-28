@@ -70,6 +70,10 @@ const getDownloadFile = async (req, res) => {
   
   const isAuth = isAuthenticated(req.session.passport);
 
+
+
+  
+if(isAuth) {
   const user = await prisma.users.findFirst({
     where: {
       id: req.user.id,
@@ -101,8 +105,6 @@ const formattedSize = await prettyBytes(fileData.size);
     loggedInUserId: parseInt(req.user.id),
     loggedInUsername: req.user.username,
   });
-  
-if(isAuth) {
   res.render('file', {
     downloadUrl: data.signedUrl,
     fileData,
