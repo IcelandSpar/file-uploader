@@ -3,11 +3,12 @@
     <img src="/cloud-server.png" alt="cloud server logo" width="30px">
     <!-- <a href="https://www.flaticon.com/free-icons/server" title="server icons">Server icons created by vectorsmarket15 - Flaticon</a> -->
     <a href="/">Home</a>
-    <a href="/form/sign-up">Register</a>
-    <a href="/form/log-in">Log In</a>
-    <a href="/form/log-out">Log Out</a>
     <% if(locals.isAuth) { %>
       <a href="/folders/<%= locals.loggedInUserId %>/<%= locals.loggedInUsername %>">Folders</a>
+      <a href="/form/log-out">Log Out</a>
+    <% } else { %>
+    <a href="/form/sign-up">Register</a>
+    <a href="/form/log-in">Log In</a>
     <% } %>
   </nav>
 </header>
