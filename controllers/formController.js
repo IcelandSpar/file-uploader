@@ -152,13 +152,16 @@ const postDeleteFolderForm = async (req, res) => {
     }
   });
 
+  let filePathsOfDeletedFiles = [];
 
   filesToBeDeleted.forEach((file) => {
-    unlink(file.path, (err) => {
-      if(err) throw err;
-    })
-    console.log(`${file.path} was deleted.`);
+    filePathsOfDeletedFiles.push(file.path);
   })
+
+  const { data, error } = await supabase
+  .storage
+  .from('file-uploader-app-files')
+  .remove(filePathsOfDeletedFiles);
 
   res.redirect(`/folders/${req.user.id}/${req.user.username}`);
 };
