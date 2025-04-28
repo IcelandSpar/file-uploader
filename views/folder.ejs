@@ -19,7 +19,7 @@
     <h1><%= locals.folderInfo.folderName %></h1>
   </div>
   <%-include('partials/upload-form') %>
-  <h3>Files: </h3>
+  <h3 class="filesUlHeading">Files: </h3>
   <% if(locals.files.length) { %>
     <ul class="filesUl">
       <% files.forEach((file, indx) => { %>
@@ -34,7 +34,7 @@
       <% }) %>
     </ul>
   <% } else { %>
-    <p>There are no files in this folder :(</p>
+    <p class="noFilesText">There are no files in this folder :(</p>
   <% } %>
 </main>
 </body>

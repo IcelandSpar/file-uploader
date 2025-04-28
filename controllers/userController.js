@@ -67,30 +67,57 @@ const postNewFolder = async (req, res) => {
 }
 
 const getDownloadFile = async (req, res) => {
+  
+  const isAuth = isAuthenticated(req.session.passport);
+
+  const user = await prisma.users.findFirst({
+    where: {
+      id: req.user.id,
+    }
+  });
+
+
 
   const fileData = await prisma.files.findFirst({
     where: {
       id: parseInt(req.params.fileId)
+    },
+    include: {
+      folder: true,
     }
   });
 
+
+
 const formattedSize = await prettyBytes(fileData.size);
+
+
 
   const { data } = await supabase
   .storage
   .from('file-uploader-app-files')
   .createSignedUrl(`uploads/${req.params.fileName}`, 60, {
     download: true,
+    loggedInUserId: parseInt(req.user.id),
+    loggedInUsername: req.user.username,
   });
   
-
-
-
+if(isAuth) {
   res.render('file', {
     downloadUrl: data.signedUrl,
     fileData,
     formattedSize,
+    isAuth,
+    loggedInUserId: user.id,
+    loggedInUsername: user.username,
+    folderViewLink: `/folders/${user.id}/${user.username}/${fileData.folder.folderName}`,
   })
+} else {
+  res.end('Not Authorized');
+}
+
+
+
 }
 
 const getFolderPage = async (req, res) => {

@@ -11,10 +11,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
 </head>
-<body>
-  <h1><%= locals.fileData.fileName %></h1>
-  <p>File Type: <%=  fileData.mimetype %></p>
-  <a href="<%= locals.fileData.fileUrl  %>" target="_blank">View File</a>
-  <p><a href="<%= locals.downloadUrl %>" download>Download</a> <%=  locals.formattedSize %></p>
+<body class="fileViewBody">
+  <%-include('partials/nav-bar') %>
+  <main class="fileViewMain">
+    <h1 class="fileViewHeading"><%= locals.fileData.fileName %></h1>
+    <div class="fileInfoCont">
+      <div class="iconAndTextCont">
+        <img src="/folder-open.svg" alt="open folder" width="24px">
+
+        <p>In Folder: <%= locals.fileData.folder.folderName %></p>
+      </div>
+      <div class="iconAndTextCont">
+        <img src="/document-search.svg" alt="file type" width="24px">
+        <p>File Type: <%=  fileData.mimetype %></p>
+      </div>
+      <p class="iconAndTextCont"><img src="/visibility.svg" alt="view file"><a href="<%= locals.fileData.fileUrl  %>" target="_blank">View File</a> (Opens in new tab)</p>
+      <p class="iconAndTextCont"><img src="/cloud-download.svg" alt="cloud download" width="24px"><a href="<%= locals.downloadUrl %>" download>Download</a> <%=  locals.formattedSize %></p>
+      <p class="returnToFolderLinkAndImg"><img src="/arrow-back.svg" alt="go back to file" width="24px"><a href="<%= locals.folderViewLink %>">Return to folder: <%= locals.fileData.folder.folderName %></a></p>
+    </div>
+  </main>
 </body>
 </html>
