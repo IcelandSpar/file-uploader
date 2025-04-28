@@ -94,7 +94,7 @@ const getLogOut = (req, res, next) => {
 
 const postLogInForm = [
   validateUser,
-  (req, res) => {
+  async (req, res) => {
 
   const errors = validationResult(req);
 
@@ -103,7 +103,13 @@ const postLogInForm = [
   return res.status(400).render('log-in', {errors: errors.array()})
 
   } else {
-    passport.authenticate('local', {failureRedirect: '/form/log-in', successRedirect: `/folders/${req.user.id}/${req.user.username}`, failureMessage: true})(req, res)
+    const user = await prisma.users.findFirst({
+      where: {
+        username: req.body.username,
+      }
+    });
+
+    passport.authenticate('local', {failureRedirect: '/form/log-in', successRedirect: `/folders/${user.id}/${user.username}`, failureMessage: true})(req, res);
 
   }
   
