@@ -203,16 +203,25 @@ const postDeleteFile = async (req, res) => {
 };
 
 const getCheckIfUserWillDelete = async (req, res) => {
+  const isAuth = isAuthenticated(req.session.passport);
+  if(isAuth) {
+    const fileToBeDeleted = await prisma.files.findFirst({
+      where: {
+        id: parseInt(req.params.fileId),
+      }
+    });
+  
+    res.render('verify-delete-file', {
+      file: fileToBeDeleted,
+      loggedInUserId: req.user.id,
+      loggedInUsername: req.user.username,
+      isAuth,
+    })
+  } else {
+    res.end('Not Authorized');
+  }
 
-  const fileToBeDeleted = await prisma.files.findFirst({
-    where: {
-      id: parseInt(req.params.fileId),
-    }
-  });
 
-  res.render('verify-delete-file', {
-    file: fileToBeDeleted,
-  })
 }
 
 

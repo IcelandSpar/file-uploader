@@ -397,12 +397,12 @@ dialog::backdrop {
   color: #cc0000;
 }
 
-.deleteFolderModalBtn {
+.deleteFolderModalBtn, .deleteFileBtn {
 transition: 1s all;
 font-weight: 750;
 }
 
-.deleteFolderModalBtn:hover {
+.deleteFolderModalBtn:hover , .deleteFileBtn:hover{
   background-color: #c93838;
   color: white;
 
@@ -414,7 +414,7 @@ font-weight: 750;
   filter: invert(93%) sepia(16%) saturate(940%) hue-rotate(311deg) brightness(107%) contrast(108%);
 }
 
-.folderViewBody, .fileViewBody {
+.folderViewBody, .fileViewBody, .verifyDeleteBody {
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
@@ -588,6 +588,35 @@ input[type="file"]::file-selector-button:active {
   display: flex;
   gap: .5rem;
 
+}
+
+.verifyDeleteForm {
+  max-width: 700px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.verifyDeleteHeading {
+  font-size: 2rem;
+}
+
+.verifyDeletePara {
+  font-size: 1.5rem;
+}
+
+.linkAndDeleteButtonCont, .linkAndDeleteButtonCont button {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.deleteFileBtn {
+  padding: .5rem 1rem;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
 }
 
 
