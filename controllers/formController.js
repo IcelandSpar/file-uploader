@@ -109,7 +109,7 @@ const postLogInForm = [
       }
     });
 
-    passport.authenticate('local', {failureRedirect: '/form/log-in', successRedirect: `/folders/${user.id}/${user.username}`, failureMessage: true})(req, res);
+    passport.authenticate('local', {failureRedirect: '/form/log-in', successRedirect: `/`, failureMessage: true})(req, res);
 
   }
 }]
@@ -126,7 +126,7 @@ const postEditFolderForm = async (req, res) => {
 
   await prisma.folders.update({
     where: {
-      id: parseInt(req.params.folderId),
+      id: req.params.folderId,
     },
     data: {
       folderName: req.body.editFolderName,
@@ -140,14 +140,14 @@ const postDeleteFolderForm = async (req, res) => {
 
   const filesToBeDeleted = await prisma.files.findMany({
     where: {
-      folderId: parseInt(req.body.folderId),
+      folderId: req.body.folderId,
       userId: req.session.passport.user,
     }
   });
 
   const deletedFolder = await prisma.folders.delete({
     where: {
-      id: parseInt(req.body.folderId),
+      id: req.body.folderId,
       userId: req.session.passport.user,
     }
   });
@@ -171,7 +171,7 @@ const postDeleteFile = async (req, res) => {
   const fileFolderOrigin = await prisma.files.findFirst({
     where: {
       userId: req.session.passport.user,
-      id: parseInt(req.params.fileId),
+      id: req.params.fileId,
       
     },
     include: {
@@ -182,7 +182,7 @@ const postDeleteFile = async (req, res) => {
   const deletedFile = await prisma.files.delete({
     where: {
       userId: req.session.passport.user,
-      id: parseInt(req.params.fileId),
+      id: req.params.fileId,
     }
   });
 
@@ -207,7 +207,7 @@ const getCheckIfUserWillDelete = async (req, res) => {
   if(isAuth) {
     const fileToBeDeleted = await prisma.files.findFirst({
       where: {
-        id: parseInt(req.params.fileId),
+        id: req.params.fileId,
       }
     });
   

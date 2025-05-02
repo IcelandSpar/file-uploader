@@ -16,7 +16,7 @@ const getUserHomePage = async (req, res) => {
 
   const usersFolders = await prisma.folders.findMany({
     where: {
-      userId: parseInt(req.params.id),
+      userId: req.params.id,
     },
     orderBy: {
       id: 'asc'
@@ -53,7 +53,7 @@ const getUserHomePage = async (req, res) => {
 const postNewFolder = async (req, res) => {
   const createdFolder = await prisma.folders.create({
     data: {
-      userId: parseInt(req.params.id),
+      userId: req.params.id,
       folderName: req.body.folderName,
       description: req.body.folderDescription,
     }
@@ -84,7 +84,7 @@ if(isAuth) {
 
   const fileData = await prisma.files.findFirst({
     where: {
-      id: parseInt(req.params.fileId)
+      id: req.params.fileId
     },
     include: {
       folder: true,
@@ -102,7 +102,7 @@ const formattedSize = await prettyBytes(fileData.size);
   .from('file-uploader-app-files')
   .createSignedUrl(`uploads/${req.params.fileName}`, 60, {
     download: true,
-    loggedInUserId: parseInt(req.user.id),
+    loggedInUserId: req.user.id,
     loggedInUsername: req.user.username,
   });
   res.render('file', {
@@ -201,7 +201,7 @@ const postFile = async (req, res) => {
   const created = await prisma.files.create({
     data: {
       folderId: folderInfo.id,
-      userId: parseInt(req.params.id),
+      userId: req.params.id,
       originalName: req.file.originalname,
       encoding: req.file.encoding,
       mimetype: req.file.mimetype,

@@ -29,7 +29,7 @@
                     <p><%= item.folderName %></p>
                   </div>
                 </a>
-                <p>Description: <%= item.description %></p>
+                <p class="folderDescriptionPara">Description: <%= item.description %></p>
                 <p>Created: <%= item.formattedDates.createDateTime[1] %>, <%= item.formattedDates.createDateTime[0] %></p>
                 <p>Last Modified: <%= item.formattedDates.modifiedDateTime[1] %>, <%= item.formattedDates.modifiedDateTime[0] %></p>
                 <p>Shared: <%= item.shared ? '✔️ Shared' : '❌, Not Shared' %></p>
@@ -81,8 +81,8 @@
               const deleteFolderModal<%= indx %> = document.querySelector('.deleteFolderModal<%= indx %>');
               const deleteFolderModalExit<%= indx %> = document.querySelector('.deleteFolderModalExit<%= indx %>');
 
-              editFolderNameInput<%= indx %>.value = '<%= item.folderName %>';
-              editFolderDescriptionInput<%= indx %>.value = '<%= item.description %>'
+              editFolderNameInput<%= indx %>.value = `<%= item.folderName %>`;
+              editFolderDescriptionInput<%= indx %>.value = `<%= item.description %>`;
 
 
               editFolderModalBtn<%= indx %>.addEventListener('click', (e) => {
