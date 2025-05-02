@@ -149,6 +149,8 @@ const getFolderPage = async (req, res) => {
       files: files,
       isAuth,
       folderInfo,
+      loggedInUserId: req.user.id,
+      loggedInUsername: req.user.username,
     })
   } else {
     res.end('Not Authorized')
